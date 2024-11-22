@@ -1,15 +1,17 @@
 const API_URL = "http://localhost:3000";
 
-// Função para fazer login do usuário
+// Função para realizar login do usuário
 async function loginUser() {
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
 
+  // Verifica se os campos estão preenchidos
   if (!email || !senha) {
-    alert("Por favor, preencha todos os campos!");
+    showMessage("Por favor, preencha todos os campos!", "error");
     return;
   }
 
+  //logar
   try {
     const response = await fetch(`${API_URL}/login`, {
       method: "POST",
@@ -21,14 +23,32 @@ async function loginUser() {
 
     const data = await response.json();
 
-    // Verifica se a resposta foi bem-sucedida
     if (response.ok) {
-      alert("Login bem-sucedido!"); // Alerta de sucesso
+      showMessage("Login realizado com sucesso! Redirecionando...", "success");
+
+      setTimeout(() => {
+        window.location.href = "";
+      }, 2000);
     } else {
-      alert(data.erro || "Erro ao fazer login."); // Alerta de erro
+      showMessage(
+        data.mensagem || "Erro ao realizar login. Tente novamente.",
+        "error"
+      );
     }
   } catch (error) {
-    console.error("Erro ao fazer login:", error);
-    alert("Erro ao fazer login."); // Alerta de erro genérico
+    console.error("Erro ao realizar login:", error);
+    showMessage("Erro ao realizar login. Tente novamente mais tarde.", "error");
   }
+}
+
+// Função para exibir mensagens no messageBox
+function showMessage(message, type) {
+  const messageBox = document.getElementById("messageBox");
+  messageBox.textContent = message;
+  messageBox.style.display = "block";
+  messageBox.style.backgroundColor = type === "success" ? "#4caf50" : "#f44336";
+
+  setTimeout(() => {
+    messageBox.style.display = "none";
+  }, 3000);
 }

@@ -2,22 +2,28 @@ const API_URL = "http://localhost:3000";
 
 // Função para cadastrar usuário
 async function registerUser() {
-  const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
-  const confirmarSenha = document.getElementById("confirmar-senha").value;
+  const email = document.getElementById("email").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  const confirmarSenha = document
+    .getElementById("confirmar-senha")
+    .value.trim();
 
   // Verifica se os campos estão preenchidos
   if (!email || !senha || !confirmarSenha) {
-    alert("Por favor, preencha todos os campos!");
+    showMessage("Por favor, preencha todos os campos!", "error");
     return;
   }
 
   // Verifica se as senhas coincidem
   if (senha !== confirmarSenha) {
-    alert("As senhas não coincidem. Verifique e tente novamente.");
+    showMessage(
+      "As senhas não coincidem. Verifique e tente novamente.",
+      "error"
+    );
     return;
   }
 
+  //Cadastrar
   try {
     const response = await fetch(`${API_URL}/register`, {
       method: "POST",
@@ -28,14 +34,33 @@ async function registerUser() {
     });
 
     const data = await response.json();
-    alert(data.mensagem);
 
-    // Redirecionar para index2.html após o cadastro
     if (response.ok) {
-      window.location.href = "../logar/index2.html";
+      showMessage("Usuário criado com sucesso! Redirecionando...", "success");
+
+      setTimeout(() => {
+        window.location.href = "../logar/index2.html";
+      }, 2000);
+    } else {
+      showMessage(data.mensagem || "Erro ao cadastrar usuário.", "error");
     }
   } catch (error) {
     console.error("Erro ao cadastrar usuário:", error);
-    alert("Erro ao cadastrar usuário.");
+    showMessage(
+      "Erro ao cadastrar usuário. Tente novamente mais tarde.",
+      "error"
+    );
   }
+}
+
+// Exibir mensagens no messageBox
+function showMessage(message, type) {
+  const messageBox = document.getElementById("messageBox");
+  messageBox.textContent = message;
+  messageBox.style.display = "block";
+  messageBox.style.backgroundColor = type === "success" ? "#4caf50" : "#f44336";
+
+  setTimeout(() => {
+    messageBox.style.display = "none";
+  }, 3000);
 }
