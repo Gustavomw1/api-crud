@@ -28,7 +28,7 @@ async function loginUser() {
 
       setTimeout(() => {
         window.location.href = "";
-      }, 2000);
+      }, 3000);
     } else {
       showMessage(
         data.mensagem || "Erro ao realizar login. Tente novamente.",

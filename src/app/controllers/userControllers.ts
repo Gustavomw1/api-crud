@@ -7,7 +7,7 @@ const SECRET = "agua";
 const db = AppDataSource;
 const userRouter = Router();
 
-//Ver user
+// Ver usuarios
 userRouter.get("/profile", async (_req: Request, res: Response) => {
   try {
     const result = await db.query("SELECT * FROM users;");
@@ -17,44 +17,49 @@ userRouter.get("/profile", async (_req: Request, res: Response) => {
   }
 });
 
-//Cadastrar usuario
+// Cadastrar usuario
 userRouter.post("/register", async (req: Request, res: Response) => {
   const { email, senha } = req.body;
 
-  //Hasheando senha
-  const HasheandoPassword = await bcrypt.hash(senha, 10);
-
   if (!email || !senha) {
-    return res.status(400).json({ mensagem: "Email e senha são obrigatorios" });
+    return res.status(400).json({ mensagem: "Email e senha são obrigatórios" });
   }
 
   try {
-    const query = "INSERT INTO users (email, senha) VALUES (?, ?)";
-    const result = await db.query(query, [email, HasheandoPassword]);
+    // Hasheando a senha
+    const hashedPassword = await bcrypt.hash(senha, 10);
 
-    return res.status(201).json({ mensagem: "Usuario criado" });
+    const query = "INSERT INTO users (email, senha) VALUES (?, ?)";
+    await db.query(query, [email, hashedPassword]);
+
+    return res.status(201).json({ mensagem: "Usuário criado" });
   } catch (erro) {
-    console.log(erro);
-    return res.status(500).json({ mensagem: "Erro ao cadastrar usuario" });
+    console.log("Erro ao cadastrar usuário:", erro);
+    return res.status(500).json({ mensagem: "Erro ao cadastrar usuário" });
   }
 });
 
-//Verificação jwt - login
+// Verificação jwt - login
 userRouter.post("/login", async (req: Request, res: Response) => {
   const { email, senha } = req.body;
+
+  if (!email || !senha) {
+    return res.status(400).json({ mensagem: "Email e senha são obrigatórios" });
+  }
 
   try {
     const result = await db.query("SELECT * FROM users WHERE email = ?", [
       email,
     ]);
 
-    const usuarios = result[0];
-
-    if (!usuarios) {
-      return res.status(404).json({ mensagem: "Senha incorreta" });
+    // Verificando se algum usuário foi encontrado
+    if (result.length === 0) {
+      return res.status(404).json({ mensagem: "Usuário não encontrado" });
     }
 
-    //Verificar a senha usando bcrypt
+    const usuarios = result[0];
+
+    // Verificar a senha usando bcrypt
     const senhaCorreta = await bcrypt.compare(senha, usuarios.senha);
     if (!senhaCorreta) {
       return res.status(401).json({ mensagem: "Senha incorreta" });
@@ -65,14 +70,14 @@ userRouter.post("/login", async (req: Request, res: Response) => {
 
     return res
       .status(200)
-      .json({ mensagem: "Usuario logado com sucesso", token });
+      .json({ mensagem: "Usuário logado com sucesso", token });
   } catch (erro) {
     console.log("Erro ao logar usuario:", erro);
     return res.status(500).json({ mensagem: "Erro ao logar usuario" });
   }
 });
 
-//Deletar usuario
+// Deletar usuario
 userRouter.delete("/profile/:id", async (req: Request, res: Response) => {
   const id = req.params.id;
 

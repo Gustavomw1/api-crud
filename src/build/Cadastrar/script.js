@@ -23,7 +23,7 @@ async function registerUser() {
     return;
   }
 
-  //Cadastrar
+  // Tenta cadastrar o usuário
   try {
     const response = await fetch(`${API_URL}/register`, {
       method: "POST",
@@ -35,6 +35,7 @@ async function registerUser() {
 
     const data = await response.json();
 
+    // Verifica o status da resposta
     if (response.ok) {
       showMessage("Usuário criado com sucesso! Redirecionando...", "success");
 
