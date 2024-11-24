@@ -8,6 +8,10 @@ const db = AppDataSource;
 const userRouter = Router();
 
 // Ver usuarios
+userRouter.get("/", async (_req: Request, res: Response) => {
+  res.send("hello word");
+});
+
 userRouter.get("/profile", async (_req: Request, res: Response) => {
   try {
     const result = await db.query("SELECT * FROM users;");
