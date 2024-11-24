@@ -1,21 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // Gera código compatível com ESNext
-    "module": "commonjs", // Compatível com Node.js
-    "lib": ["ESNext"], // Usa as bibliotecas modernas do ESNext
-    "allowJs": true, // Permite misturar arquivos JS com TS
-    "outDir": "dist", // Saída dos arquivos compilados
-    "rootDir": "src", // Diretório base para entrada dos arquivos
-    "strict": true, // Ativa verificações estritas
-    "noImplicitAny": true, // Impede uso implícito de "any"
-    "strictPropertyInitialization": false, // Necessário para usar TypeORM
-    "esModuleInterop": true, // Habilita interoperabilidade com módulos ES
-    "resolveJsonModule": true, // Permite importação de arquivos JSON
-    "experimentalDecorators": true, // Suporte para decorators (TypeORM)
-    "emitDecoratorMetadata": true, // Emissão de metadados para decorators
-    "skipLibCheck": true, // Ignora checagem de tipo de bibliotecas
-    "forceConsistentCasingInFileNames": true // Evita erros por diferença de maiúsculas/minúsculas
+    "target": "ESNext",
+    "module": "commonjs",
+    "lib": ["ESNext"],
+    "allowJs": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictPropertyInitialization": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"], // Garante que apenas arquivos do "src" serão compilados
-  "exclude": ["node_modules", "dist"] // Evita compilar arquivos desnecessários
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

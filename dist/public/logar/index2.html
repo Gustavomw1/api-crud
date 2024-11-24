@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Logar</h1>
+      <p>Entre na sua conta gratuitamente para ter acesso às nossas páginas.</p>
+      <form id="login-form" onsubmit="event.preventDefault(); loginUser();">
+        <div class="input">
+          <input
+            type="email"
+            id="email"
+            placeholder="Digite seu email..."
+            required
+          />
+        </div>
+
+        <div class="input">
+          <input
+            type="password"
+            id="senha"
+            placeholder="Digite sua senha..."
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-cadastrar">Entrar</button>
+      </form>
+
+      <p class="divider">OU</p>
+
+      <div class="dividir">
+        <p>
+          Não tem uma conta?
+          <a class="link-login" href="../Cadastrar/index.html">Faça cadastro</a>
+        </p>
+      </div>
+      <div id="messageBox" class="message"></div>
+    </div>
+  </body>
+</html>
