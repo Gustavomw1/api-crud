@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["ESNext"],
     "allowJs": true,
-    "outDir": "./dist",
+    "outDir": "public",
     "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
