@@ -29,6 +29,7 @@
   "scripts": {
     "public": "tsc",
     "dev:server": "ts-node-dev src/server.ts",
+    "vercel-build": "npx prisma migrate deploy",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   }
 }
