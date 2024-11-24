@@ -28,8 +28,9 @@
   },
   "scripts": {
     "public": "tsc",
+    "build": "tsc",
+    "start": "node dist/server.js",
     "dev:server": "ts-node-dev src/server.ts",
-    "vercel-build": "npx prisma migrate deploy",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   }
 }
