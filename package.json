@@ -27,10 +27,8 @@
     "typeorm": "^0.3.11"
   },
   "scripts": {
-    "build": "tsc && xcopy /E /I /Y src\\public\\ dist\\public\\",
-    "start": "node dist/server.js",
+    "public": "tsc",
     "dev:server": "ts-node-dev src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "vercel-build": "tsc"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   }
 }
