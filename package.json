@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "Awesome node developed with TypeORM.",
   "type": "commonjs",
-  "engines": {
-    "node": "14.x"
-  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.13",
