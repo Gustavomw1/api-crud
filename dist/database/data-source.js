@@ -13,7 +13,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    port: 34066,
+    port: 3306,
     charset: "utf8mb4",
 });
 exports.AppDataSource.initialize()
